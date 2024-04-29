@@ -34,13 +34,32 @@ void chooseSymbol() {
         AI.playerSymbol = 'O';
         player_2.playerSymbol= 'O';
     }
-    else {// You didn't make the case that the user enter a strange letter beca
+    else {//@Demo You didn't make the case that the user enter a strange letter because you
+    // assume that this code will be on gui and it is only x and o in gui??
+    //Okay, you meant that. I just didn't read the comment below.
         player_1.playerSymbol = 'O';
         AI.playerSymbol = 'X';
         player_2.playerSymbol= 'X';
     }
     cout << "\n\n\n";
 }
+
+void mode (int &mode_factor)  // mode_factor is detected upon the user choice to play 2-players mode 
+//or play computer mode
+{
+cout <<"What mode you want to play?"<<endl<<"1- Two players mode"<<endl<<"2- Play with the computer";
+cin>>mode_factor;
+if(mode_factor==1)
+{
+    play_game_2_players();
+    else
+    {
+        play_game_AI();
+    }
+}
+}
+
+
 
 int getSizeOfSymbols(const char symbols[][3]) {
     int counter = 0;
@@ -77,17 +96,20 @@ bool checkWin(const char symbols[][3], char playerSymbol) {
 // function to get the player's move
 
 int* getPlayerMove() {
-    int* ptr = new int[2]; // this variable is dealed as an array, that will contain the index of the array symbols, and its length will be 2
+    int* ptr = new int[2]; // this variable is dealed as an array, that will contain the index of the array symbols,
+    // and its length will be 2
     cout << "Please, enter the index of the move: (1:3 | 1:3): ";
     cin >> ptr[0] >> ptr[1];
 
-    // here I can make an if condition to check if the index is within the range, but u know we are deal with GUI >> to hendo
+    // here I can make an if condition to check if the index is within the range, 
+    //but u know we are deal with GUI >> to hendo
     return ptr;
 }
 
 // function to get the computer's move
 int* getComputerMove(const char symbols[][3]) {
-    // here I will not ask to cin >> any thing, as computer will analyze the state of the game, and determine the suitable action
+    // here I will not ask to cin >> any thing, as computer will analyze the state of the game, 
+    //and determine the suitable action
     int counter_1, counter_2;
     int* ptr = new int[2]; // it is like the pointer in getPlayerMove function
     // check for winning move
@@ -143,13 +165,30 @@ void initialize_grid(char symbols[][3]) {
             symbols[counter_1][counter_2] = ' ';
 }
 
+void play_game_2_players()
+{
+
+}
+
+void play_game_AI()
+{
+
+}
+
+
 void playGame() {
     char symbols[3][3];
     bool playerTurn = true;
     char playAgain;
+    int mode_factor;
     initialize_grid(symbols);
     chooseSymbol();
     drawBoard(symbols);
+    mode(mode_factor);// This function should have the effect of branching to one of the modes,
+    // and We should define one function for playing every mode 
+
+
+//All written below should be transformed to the function of AI
     while (true) {
         if (playerTurn) {
             int* move = getPlayerMove();
