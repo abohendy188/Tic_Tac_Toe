@@ -2,19 +2,9 @@
 // here, symbol is the main array I used to contain X-O
 
 #include <iostream>
-#include <cstdlib>
-#include <ctime>
-#include <cstring>
-
 using namespace std;
-
-struct player {
-    char playerSymbol;
-    bool whoStart;
-}player_1, player_2, AI;
-
-// this function is needed to draw the grid contained the state of the game.
-void drawBoard(const char symbols[][3]) {
+// function to draw the board
+void drawBoard(const char symbols[3][3]) {
     cout << "\t\t\t\t\t\t" << " " << symbols[0][0] << " | " << symbols[0][1] << " | " << symbols[0][2] << endl;
     cout << "\t\t\t\t\t\t" << "-----------" << endl;
     cout << "\t\t\t\t\t\t" << " " << symbols[1][0] << " | " << symbols[1][1] << " | " << symbols[1][2] << endl;
@@ -22,6 +12,7 @@ void drawBoard(const char symbols[][3]) {
     cout << "\t\t\t\t\t\t" << " " << symbols[2][0] << " | " << symbols[2][1] << " | " << symbols[2][2] << endl;
     cout << "\n\n\n\n";
 }
+<<<<<<< HEAD
 
 // function to determine the symbol you want to play with
 void chooseSymbol() {
@@ -72,25 +63,37 @@ int getSizeOfSymbols(const char symbols[][3]) {
 
 // this function is to check if one of the two opponents has won.
 bool checkWin(const char symbols[][3], char playerSymbol) {
+=======
+int checkWin(const char symbols[][3]) {
+>>>>>>> 088ec6e07f8aa7f39df76a3fd0876b73cf693736
     // check the rows
-    for (int counter = 0; counter < 3; counter++) 
-        if (symbols[counter][0] == playerSymbol && symbols[counter][1] == playerSymbol && symbols[counter][2] == playerSymbol)
-            return true;
+    for (int counter = 0; counter < 3; counter++)
+        if (symbols[counter][0] != ' ' && symbols[counter][0] == symbols[counter][1] && symbols[counter][0] == symbols[counter][2])
+            return (symbols[counter][0] == 'X' ? 2 : -2);
 
     // check the columns
     for (int counter = 0; counter < 3; counter++)
-        if (symbols[0][counter] == playerSymbol && symbols[1][counter] == playerSymbol && symbols[2][counter] == playerSymbol)
-            return true;
-    
+        if (symbols[0][counter] != ' ' && symbols[0][counter] == symbols[1][counter] && symbols[0][counter] == symbols[2][counter])
+            return (symbols[0][counter] == 'X' ? 2 : -2);
+
     // check the diagonal
-    if (symbols[0][0] == playerSymbol && symbols[1][1] == playerSymbol && symbols[2][2] == playerSymbol) {
-        return true;
+    if (symbols[0][0] != ' ' && symbols[0][0] == symbols[1][1] && symbols[0][0] == symbols[2][2]) {
+        return (symbols[0][0] == 'X' ? 2 : -2);
     }
-    if (symbols[0][2] == playerSymbol && symbols[1][1] == playerSymbol && symbols[2][0] == playerSymbol) {
-        return true;
+    if (symbols[0][2] != ' ' && symbols[0][2] == symbols[1][1] && symbols[0][2] == symbols[2][0]) {
+        return (symbols[0][2] == 'X' ? 2 : -2);
     }
-    return false;
+    bool tie = true;
+    for (int counter_1 = 0; counter_1 < 3; counter_1++)
+        for (int counter_2 = 0; counter_2 < 3; counter_2++)
+            if (symbols[counter_1][counter_2] == ' ')
+                tie = false;
+    if (tie)
+        return 0;
+    else
+        return 1;
 }
+<<<<<<< HEAD
 
 
 // function to get the player's move
@@ -123,47 +126,65 @@ int* getComputerMove(const char symbols[][3]) {
                     ptr[0] = counter_1;
                     ptr[1] = counter_2;
                     return ptr;
+=======
+int miniMax(char symbols[][3], bool isMaximizing, bool firstTime = true) {
+    int result = checkWin(symbols);
+    if (result != 1) {
+        return result;
+    }
+    if (isMaximizing) {
+        int minusInfinity = -10;
+        int rowIndex = 0;
+        int colIndex = 0;
+        for (int counter_1 = 0; counter_1 < 3; counter_1++) 
+            for (int counter_2 = 0; counter_2 < 3; counter_2++) {
+                if (symbols[counter_1][counter_2] == ' ') {
+                    symbols[counter_1][counter_2] = 'X';
+                    int tempScore = miniMax(symbols, false, false);
+                    symbols[counter_1][counter_2] = ' ';
+                    if (tempScore > minusInfinity) {
+                        minusInfinity = tempScore;
+                        rowIndex = counter_1;
+                        colIndex = counter_2;
+                    }
+>>>>>>> 088ec6e07f8aa7f39df76a3fd0876b73cf693736
                 }
             }
-
-    // check for blocking move
-    for (counter_1 = 0; counter_1 < 3; counter_1++)
-        for (counter_2 = 0; counter_2 < 3; counter_2++)
-            if (symbols[counter_1][counter_2] == ' ') {
-                char tempSymbol[3][3];
-                memcpy(tempSymbol, symbols, sizeof(symbols));
-                tempSymbol[counter_1][counter_2] = player_1.playerSymbol;
-                if (checkWin(tempSymbol, player_1.playerSymbol)) {
-                    ptr[0] = counter_1;
-                    ptr[1] = counter_2;
-                    return ptr;
+        if (firstTime) {
+            symbols[rowIndex][colIndex] = 'O';
+        }
+        return minusInfinity;
+    }
+    else {
+        int plusInfinity = 10;
+        int rowIndex = 0;
+        int colIndex = 0;
+        for (int counter_1 = 0; counter_1 < 3; counter_1++)
+            for (int counter_2 = 0; counter_2 < 3; counter_2++) {
+                if (symbols[counter_1][counter_2] == ' ') {
+                    symbols[counter_1][counter_2] = 'O';
+                    int tempScore = miniMax(symbols, true, false);
+                    symbols[counter_1][counter_2] = ' ';
+                    if (tempScore < plusInfinity) {
+                        plusInfinity = tempScore;
+                        rowIndex = counter_1;
+                        colIndex = counter_2;
+                    }
                 }
             }
-
-    // then if no blocking or winning ya hendo, we will generate a random value
-
-    int* availableMoves[9];  // Array of 9 pointers
-
-    for (int counter_1 = 0; counter_1 < 9; counter_1++)
-        availableMoves[counter_1] = new int[2];
-
-    for (counter_1 = 0; counter_1 < 3; counter_1++)
-        for (counter_2 = 0; counter_2 < 3; counter_2++)
-            if (symbols[counter_1][counter_2] == ' ') {
-                availableMoves[counter_1 * 3 + counter_2][0] = counter_1;
-                availableMoves[counter_1 * 3 + counter_2][1] = counter_2;
-            }
-
-    srand(time(0));  
-    int randomIndex = rand() % (sizeof(availableMoves) / sizeof(availableMoves[0]));
-    return availableMoves[randomIndex];
+        if (firstTime) {
+            symbols[rowIndex][colIndex] = 'O';
+        }
+        return plusInfinity;
+    }
 }
-
-void initialize_grid(char symbols[][3]) {
+// function to initialize the array of symbols
+void initArray(char symbols[][3]) {
     for (int counter_1 = 0; counter_1 < 3; counter_1++)
         for (int counter_2 = 0; counter_2 < 3; counter_2++)
             symbols[counter_1][counter_2] = ' ';
 }
+<<<<<<< HEAD
 
 void play_game_2_players()
 {
@@ -176,13 +197,23 @@ void play_game_AI()
 }
 
 
+=======
+// function to play the game
+>>>>>>> 088ec6e07f8aa7f39df76a3fd0876b73cf693736
 void playGame() {
+    int result = 1;
+    int rowIndex = 0;
+    int colIndex = 0;
     char symbols[3][3];
+<<<<<<< HEAD
     bool playerTurn = true;
     char playAgain;
     int mode_factor;
     initialize_grid(symbols);
     chooseSymbol();
+=======
+    initArray(symbols);
+>>>>>>> 088ec6e07f8aa7f39df76a3fd0876b73cf693736
     drawBoard(symbols);
     mode(mode_factor);// This function should have the effect of branching to one of the modes,
     // and We should define one function for playing every mode 
@@ -190,63 +221,33 @@ void playGame() {
 
 //All written below should be transformed to the function of AI
     while (true) {
-        if (playerTurn) {
-            int* move = getPlayerMove();
-            symbols[move[0] - 1][move[1] - 1] = player_1.playerSymbol;
-            drawBoard(symbols);
-            if (checkWin(symbols, player_1.playerSymbol)) {
-                cout << "You won!, congratulations :)\nwant to play again? (Y/N): ";
-                cin >> playAgain;
-                cin.ignore();
-                if (playAgain == 'n' || playAgain == 'N')
-                    break;
-                else {
-                    initialize_grid(symbols);
-                    drawBoard(symbols);
-                    continue;
-                }
-            }
+        // get player move
+        cout << "Enter the row, then enter the column: ";
+        cin >> rowIndex >> colIndex;
+        symbols[rowIndex][colIndex] = 'X';
+        cout << "row: " << rowIndex << " col: " << colIndex << " symbol: " << symbols[rowIndex][colIndex] << endl;
+        // apply minimax and get AI move
+        int move = miniMax(symbols, false);
+        drawBoard(symbols);
+        result = checkWin(symbols);
+        if (result == 2) {
+            cout << "Congratulation! You win.\n";
+            break;
         }
-        else {
-            int* move = getComputerMove(symbols);
-            symbols[move[0]][move[1]] = AI.playerSymbol;///////////////
-            drawBoard(symbols);
-            if (checkWin(symbols, AI.playerSymbol)) {
-                cout << "You lost! sorry :(\nwant to play again? (Y/N): ";
-                cin >> playAgain;
-                cin.ignore();
-                if (playAgain == 'n' || playAgain == 'N')
-                    break;
-                else {
-                    initialize_grid(symbols);
-                    drawBoard(symbols);
-                    continue;
-                }
-            }
+        if (result == -2) {
+            cout << "Sorry! You loss.\n";
+            break;
         }
-        if (getSizeOfSymbols(symbols) == 9) {
-            cout << "It is a tie.\nwant to play again? (Y/N): ";
-            cin >> playAgain;
-            cin.ignore();
-            if (playAgain == 'n' || playAgain == 'N')
-                break;
-            else {
-                initialize_grid(symbols);
-                drawBoard(symbols);
-                continue;
-            }
+        if (result == 0) {
+            cout << "No winner, it is a tie.\n";
+            break;
         }
-        playerTurn = !playerTurn;
     }
 }
-
-
 int main() {
-    cout << "Welcome to Tic-Tac-Toe!" << endl;
-    cout << "=======================" << endl << endl;
-
+    cout << "Hello to tic tac toe game!\n";
+    cout << "--------------------------\n";
     playGame();
-
     return 0;
 }
 
