@@ -36,8 +36,23 @@ int choose_play_mode()
     return mode;
 }
 
+//4------function to get the player symbol 
+void get_two_player_symbols(char &player_one,char &player_two)
+{
+    cout<<"Player 1 should choose what symbol to play with!\n";
+    cin>>player_one;
+    cin.ignore();
+    if (player_one=='X' |'x')
+    {
+        player_two='O';
+    }
+    else
+    {
+        player_two='X';
+    }
+}
 
-//4------Function to check the win
+//5------Function to check the win
 int checkWin(const char symbols[][3]) 
 {
     // check the rows
@@ -126,6 +141,17 @@ int miniMax(char symbols[][3], bool isMaximizing, bool firstTime = true) {
 //5-------------------functio to Two players mode
 void Two_players_mode(int &rowIndex,int &colIndex,int &result, char symbols[][3])
 {
+    // determine the players symbol
+
+    char player_one,player_two;
+    get_two_player_symbols(player_one,player_two);
+    cout << "Player 1, Enter the row, then enter the column! ";
+        cin >> rowIndex >> colIndex;
+        symbols[rowIndex][colIndex] = player_one;
+        
+
+
+
     
 }
 
