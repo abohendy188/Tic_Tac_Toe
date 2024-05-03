@@ -36,7 +36,7 @@ int choose_play_mode()
     return mode;
 }
 
-//4------function to get the player symbol 
+//4------function to get the player symbol for two players mode
 void get_two_player_symbols(char &player_one,char &player_two)
 {
     cout<<"Player 1 should choose what symbol to play with!\n";
