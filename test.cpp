@@ -87,8 +87,25 @@ int checkWin(const char symbols[][3])
     else
         return 1;
 }
+//6----function to check if the game ended.
+bool exitGame(const char symbols[][3]) {
+    int result = checkWin(symbols);
+    if (result == 2) {
+        cout << "Congratulation! You win.\n";
+        return true;
+    }
+    if (result == -2) {
+        cout << "Sorry! You loss.\n";
+        return true;
+    }
+    if (result == 0) {
+        cout << "No winner, it is a tie.\n";
+        return true;
+    }
+    return false;
+}
 
-//6---------------Function to check the win in case of two players
+//7---------------Function to check the win in case of two players
 int checkWin_Two_Players(const char symbols[][3],char player_one, char player_two)
  {
     // check the rows
@@ -122,7 +139,7 @@ int checkWin_Two_Players(const char symbols[][3],char player_one, char player_tw
 
 //----------------------AI algorithm function-------------------------------------
 
-//7-------------------The easy level function-----------------------------------------------
+//8-------------------The easy level function-----------------------------------------------
 void getRandomMove(char symbols[][3]) {
     // then if no blocking or winning ya hendo, we will generate a random value
 
@@ -157,7 +174,7 @@ void getRandomMove(char symbols[][3]) {
 
 
 
-// 8------------The meduim level function----------------------------------------
+// 9------------The meduim level function----------------------------------------
 void getComputerMove(char symbols[3][3]) {
     // here I will not ask to cin >> any thing, as computer will analyze the state of the game, and determine the suitable action
     int counter_1, counter_2;
@@ -201,7 +218,7 @@ void getComputerMove(char symbols[3][3]) {
     getRandomMove(symbols);
 }
 
-//9------The hard level function---------------------------------------
+//10------The hard level function---------------------------------------
 int miniMax(char symbols[][3], bool isMaximizing, bool firstTime = true) {
     int result = checkWin(symbols);
     if (result != 1) {
@@ -256,7 +273,7 @@ int miniMax(char symbols[][3], bool isMaximizing, bool firstTime = true) {
 
 
 
-//10-----------------function to play with AI
+//11-----------------function to play with AI
 
 void play_with_AI(int &rowIndex,int &colIndex,int &result, char symbols[][3],int &gameLevel)
 {
@@ -267,6 +284,8 @@ void play_with_AI(int &rowIndex,int &colIndex,int &result, char symbols[][3],int
         cout << "Enter the row, then enter the column: ";
         cin >> rowIndex >> colIndex;
         symbols[rowIndex][colIndex] = 'X';
+        if (exitGame(symbols))
+            break;
         if (gameLevel == 1) {
             getRandomMove(symbols);
         }
@@ -278,28 +297,15 @@ void play_with_AI(int &rowIndex,int &colIndex,int &result, char symbols[][3],int
             int move = miniMax(symbols, false);
         }
         drawBoard(symbols);
-        result = checkWin(symbols);
-
-        if (result == 2) {
-            cout << "Congratulation! You win.\n";
+        if (exitGame(symbols))
             break;
-        }
-        if (result == -2) {
-            cout << "Sorry! You lose.\n";
-            break;
-        }
-        if (result == 0) {
-            cout << "No winner, it is a tie.\n";
-            break;
-        }
-
     }
 }
 
 
 //-----------------------------------------------------------------------------------------------
 
-//11-------------------functio to Two players mode
+//12-------------------functio to Two players mode
 void Two_players_mode(int &rowIndex,int &colIndex,int &result, char symbols[][3])
 {
     char player_one,player_two;
@@ -350,7 +356,7 @@ void Two_players_mode(int &rowIndex,int &colIndex,int &result, char symbols[][3]
 
     
 
-//11-----------------Function of the game--------------------------------
+//13-----------------Function of the game--------------------------------
 
 
 void playGame()
