@@ -12,7 +12,8 @@ using namespace std;
 
 
 // 1------- function to initialize the array of symbols by space character(as a sign for being empty).
-void initArray(char symbols[][3]) {
+void initArray(char symbols[][3])
+ {
     for (int counter_1 = 0; counter_1 < 3; counter_1++)
         for (int counter_2 = 0; counter_2 < 3; counter_2++)
             symbols[counter_1][counter_2] = ' ';
@@ -45,7 +46,7 @@ void get_two_player_symbols(char &player_one,char &player_two)
     cout<<"Player 1 should choose what symbol to play with!\n";
     cin>>player_one;
     cin.ignore();
-    if (player_one=='X' |'x')
+    if (player_one == 'X' || player_one == 'x')
     {
         player_two='O';
     }
@@ -87,11 +88,41 @@ int checkWin(const char symbols[][3])
         return 1;
 }
 
+//6---------------Function to check the win in case of two players
+int checkWin_Two_Players(const char symbols[][3],char player_one, char player_two)
+ {
+    // check the rows
+    for (int counter = 0; counter < 3; counter++)
+        if (symbols[counter][0] != ' ' && symbols[counter][0] == symbols[counter][1] && symbols[counter][0] == symbols[counter][2])
+            return (symbols[counter][0] == player_one ? 2 : -2);
 
+    // check the columns
+    for (int counter = 0; counter < 3; counter++)
+        if (symbols[0][counter] != ' ' && symbols[0][counter] == symbols[1][counter] && symbols[0][counter] == symbols[2][counter])
+            return (symbols[0][counter] == player_one ? 2 : -2);
+
+    // check the diagonal
+    if (symbols[0][0] != ' ' && symbols[0][0] == symbols[1][1] && symbols[0][0] == symbols[2][2])
+     {
+        return (symbols[0][0] == player_one ? 2 : -2);
+    }
+    if (symbols[0][2] != ' ' && symbols[0][2] == symbols[1][1] && symbols[0][2] == symbols[2][0]) {
+        return (symbols[0][2] == player_one ? 2 : -2);
+    }
+    bool tie = true;
+    for (int counter_1 = 0; counter_1 < 3; counter_1++)
+        for (int counter_2 = 0; counter_2 < 3; counter_2++)
+            if (symbols[counter_1][counter_2] == ' ')
+                tie = false;
+    if (tie)
+        return 0;
+    else
+        return 1;
+}
 
 //----------------------AI algorithm function-------------------------------------
 
-//-------------------The easy level function-----------------------------------------------
+//7-------------------The easy level function-----------------------------------------------
 void getRandomMove(char symbols[][3]) {
     // then if no blocking or winning ya hendo, we will generate a random value
 
@@ -126,7 +157,7 @@ void getRandomMove(char symbols[][3]) {
 
 
 
-// ------------The meduim level function---------------
+// 8------------The meduim level function----------------------------------------
 void getComputerMove(char symbols[3][3]) {
     // here I will not ask to cin >> any thing, as computer will analyze the state of the game, and determine the suitable action
     int counter_1, counter_2;
@@ -170,7 +201,7 @@ void getComputerMove(char symbols[3][3]) {
     getRandomMove(symbols);
 }
 
-
+//9------The hard level function---------------------------------------
 int miniMax(char symbols[][3], bool isMaximizing, bool firstTime = true) {
     int result = checkWin(symbols);
     if (result != 1) {
@@ -223,24 +254,9 @@ int miniMax(char symbols[][3], bool isMaximizing, bool firstTime = true) {
 }
 
 
-//5-------------------functio to Two players mode
-void Two_players_mode(int &rowIndex,int &colIndex,int &result, char symbols[][3])
-{
-    // determine the players symbol
-
-    char player_one,player_two;
-    get_two_player_symbols(player_one,player_two);
-    cout << "Player 1, Enter the row, then enter the column! ";
-        cin >> rowIndex >> colIndex;
-        symbols[rowIndex][colIndex] = player_one;
-        
 
 
-
-    
-}
-
-//function to play with AI
+//10-----------------function to play with AI
 
 void play_with_AI(int &rowIndex,int &colIndex,int &result, char symbols[][3],int &gameLevel)
 {
@@ -262,14 +278,14 @@ void play_with_AI(int &rowIndex,int &colIndex,int &result, char symbols[][3],int
             int move = miniMax(symbols, false);
         }
         drawBoard(symbols);
-        int result = checkWin(symbols);
+        result = checkWin(symbols);
 
         if (result == 2) {
             cout << "Congratulation! You win.\n";
             break;
         }
         if (result == -2) {
-            cout << "Sorry! You loss.\n";
+            cout << "Sorry! You lose.\n";
             break;
         }
         if (result == 0) {
@@ -283,8 +299,58 @@ void play_with_AI(int &rowIndex,int &colIndex,int &result, char symbols[][3],int
 
 //-----------------------------------------------------------------------------------------------
 
+//11-------------------functio to Two players mode
+void Two_players_mode(int &rowIndex,int &colIndex,int &result, char symbols[][3])
+{
+    char player_one,player_two;
+    // determine the players symbol
+    get_two_player_symbols(player_one,player_two);
+    do
+    {
+        
+        cout << "Player 1, Enter the row, then enter the column! ";
+        cin >> rowIndex >> colIndex;
+        symbols[rowIndex][colIndex] = player_one;
+        result= checkWin_Two_Players(symbols,player_one,player_two);
+        drawBoard(symbols);
 
-//-----------------Function of the game--------------------------------
+        if (result==2)
+        {
+            cout<<"Player_1 wins!";
+            return;
+        
+        }
+        else if (result==0)
+        {
+            cout<<"There is a draw";
+            return;
+        }
+        cout << "Player 2, Enter the row, then enter the column! ";
+        cin >> rowIndex >> colIndex;
+        symbols[rowIndex][colIndex] = player_two;
+        result= checkWin_Two_Players(symbols,player_one,player_two);
+        drawBoard(symbols);
+        if (result==-2)
+        {
+            cout<<"Player_2 wins!";
+            return;
+        }
+        else if (result==0)
+        {
+            cout<<"There is a draw";
+            return;
+        }
+    } while (result==1);
+    
+    
+}
+    
+
+
+
+    
+
+//11-----------------Function of the game--------------------------------
 
 
 void playGame()
