@@ -3,7 +3,13 @@
 
 #include <iostream>
 using namespace std;
+
+
+//----------------Functions----------------------------------------------------------
+
+
 // function to draw the board
+
 void drawBoard(const char symbols[3][3]) {
     cout << "\t\t\t\t\t\t" << " " << symbols[0][0] << " | " << symbols[0][1] << " | " << symbols[0][2] << endl;
     cout << "\t\t\t\t\t\t" << "-----------" << endl;
@@ -12,6 +18,9 @@ void drawBoard(const char symbols[3][3]) {
     cout << "\t\t\t\t\t\t" << " " << symbols[2][0] << " | " << symbols[2][1] << " | " << symbols[2][2] << endl;
     cout << "\n\n\n\n";
 }
+
+//Function to check the win
+
 int checkWin(const char symbols[][3]) {
     // check the rows
     for (int counter = 0; counter < 3; counter++)
@@ -104,6 +113,7 @@ void playGame() {
     char symbols[3][3];
     initArray(symbols);
     drawBoard(symbols);
+    
     while (true) {
         // get player move
         cout << "Enter the row, then enter the column: ";
