@@ -14,12 +14,9 @@ add_executable(TicTacToe
     src/TicTacToe.cpp
 )
 
-# Set the path to Google Test (assuming it's in the project directory)
-set(GTEST_DIR ${CMAKE_SOURCE_DIR}/googletest)
-
 # Add Google Test
 enable_testing()
-add_subdirectory(${GTEST_DIR})
+add_subdirectory(googletest)
 
 # Add unit tests
 add_executable(runUnitTests tests/Test_TicTacToe.cpp)
