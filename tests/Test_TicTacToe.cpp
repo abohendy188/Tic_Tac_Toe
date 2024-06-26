@@ -46,19 +46,14 @@ TEST(TicTacToeTest, ResetBoard) {
 //     EXPECT_EQ(output, expectedOutput);
 // }
 
+extern std::string drawBoard(const char board[3][3]);
+
 TEST(TicTacToeTest, DrawBoard) {
-    char board[3][3] = {
-        {'X', 'O', 'X'},
-        {'O', 'X', 'O'},
-        {'X', 'O', 'X'}
-    };
+    char board[3][3] = { {'X', 'O', 'X'},
+                         {'O', 'X', 'O'},
+                         {'X', 'O', 'X'} };
     std::string output = drawBoard(board);
-    std::string expectedOutput = 
-        "\t\t\t\t\t\t X | O | X\n"
-        "\t\t\t\t\t\t-----------\n"
-        "\t\t\t\t\t\t O | X | O\n"
-        "\t\t\t\t\t\t-----------\n"
-        "\t\t\t\t\t\t X | O | X\n\n\n\n\n";
+    std::string expectedOutput = "\n\t\t\t\t\t\t X | O | X\n\t\t\t\t\t\t-----------\n\t\t\t\t\t\t O | X | O\n\t\t\t\t\t\t-----------\n\t\t\t\t\t\t X | O | X\n\n\n\n\n";
     EXPECT_EQ(output, expectedOutput);
 }
 
