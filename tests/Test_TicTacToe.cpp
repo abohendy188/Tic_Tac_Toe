@@ -30,21 +30,47 @@ TEST(TicTacToeTest, ResetBoard) {
 
 
 // Test drawing the board
+// TEST(TicTacToeTest, DrawBoard) {
+//     char board[3][3] = {{'X', 'O', 'X'},
+//                         {'O', 'X', 'O'}, 
+//                         {'X', 'O', 'X'}};
+//     testing::internal::CaptureStdout();
+//     drawBoard(board);
+//     std::string output = testing::internal::GetCapturedStdout();
+//     std::string expectedOutput = 
+//         "\f\t\t\t\t\t\t X | O | X\n"
+//         "\t\t\t\t\t\t-----------\n"
+//         "\t\t\t\t\t\t O | X | O\n"
+//         "\t\t\t\t\t\t-----------\n"
+//         "\t\t\t\t\t\t X | O | X\n\n\n\n\n";
+//     EXPECT_EQ(output, expectedOutput);
+// }
+
+// Assuming this is part of Test_TicTacToe.cpp
 TEST(TicTacToeTest, DrawBoard) {
-    char board[3][3] = {{'X', 'O', 'X'},
-                        {'O', 'X', 'O'}, 
-                        {'X', 'O', 'X'}};
+    // Define a board with example symbols
+    char board[3][3] = {
+        {'X', 'O', 'X'},
+        {'O', 'X', 'O'},
+        {'X', 'O', 'X'}
+    };
+
+    // Define the expected output
+    std::string expectedOutput = "\t\t\t\t\t\t X | O | X\n\t\t\t\t\t\t-----------\n\t\t\t\t\t\t O | X | O\n\t\t\t\t\t\t-----------\n\t\t\t\t\t\t X | O | X\n\n\n\n\n";
+
+    // Redirect cout to capture output
     testing::internal::CaptureStdout();
+    
+    // Call drawBoard with the test board
     drawBoard(board);
+    
+    // Get the captured output
     std::string output = testing::internal::GetCapturedStdout();
-    std::string expectedOutput = 
-        "\f\t\t\t\t\t\t X | O | X\n"
-        "\t\t\t\t\t\t-----------\n"
-        "\t\t\t\t\t\t O | X | O\n"
-        "\t\t\t\t\t\t-----------\n"
-        "\t\t\t\t\t\t X | O | X\n\n\n\n\n";
+
+    // Compare the actual output with the expected output
     EXPECT_EQ(output, expectedOutput);
 }
+
 
 
 
