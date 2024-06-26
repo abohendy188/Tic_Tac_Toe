@@ -74,7 +74,7 @@ jobs:
           cd build
           ./runIntegrationTests
 
- deploy:
+deploy:
   needs: test
   runs-on: ubuntu-latest
   steps:
