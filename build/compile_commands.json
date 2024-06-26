@@ -1,0 +1,50 @@
+[
+{
+  "directory": "D:/Project_testing/Github/Tic_Tac_Toe/build",
+  "command": "C:\\msys64\\mingw64\\bin\\c++.exe -ID:/Project_testing/Github/Tic_Tac_Toe/include -g -std=gnu++17 -o CMakeFiles\\TicTacToe.dir\\src\\main_tic.cpp.obj -c D:\\Project_testing\\Github\\Tic_Tac_Toe\\src\\main_tic.cpp",
+  "file": "D:\\Project_testing\\Github\\Tic_Tac_Toe\\src\\main_tic.cpp",
+  "output": "CMakeFiles\\TicTacToe.dir\\src\\main_tic.cpp.obj"
+},
+{
+  "directory": "D:/Project_testing/Github/Tic_Tac_Toe/build",
+  "command": "C:\\msys64\\mingw64\\bin\\c++.exe -ID:/Project_testing/Github/Tic_Tac_Toe/include -g -std=gnu++17 -o CMakeFiles\\TicTacToe.dir\\src\\TicTacToe.cpp.obj -c D:\\Project_testing\\Github\\Tic_Tac_Toe\\src\\TicTacToe.cpp",
+  "file": "D:\\Project_testing\\Github\\Tic_Tac_Toe\\src\\TicTacToe.cpp",
+  "output": "CMakeFiles\\TicTacToe.dir\\src\\TicTacToe.cpp.obj"
+},
+{
+  "directory": "D:/Project_testing/Github/Tic_Tac_Toe/build",
+  "command": "C:\\msys64\\mingw64\\bin\\c++.exe -ID:/Project_testing/Github/Tic_Tac_Toe/include -isystem D:/Project_testing/Github/Tic_Tac_Toe/googletest/googletest/include -isystem D:/Project_testing/Github/Tic_Tac_Toe/googletest/googletest -g -std=gnu++17 -o CMakeFiles\\runUnitTests.dir\\tests\\Test_TicTacToe.cpp.obj -c D:\\Project_testing\\Github\\Tic_Tac_Toe\\tests\\Test_TicTacToe.cpp",
+  "file": "D:\\Project_testing\\Github\\Tic_Tac_Toe\\tests\\Test_TicTacToe.cpp",
+  "output": "CMakeFiles\\runUnitTests.dir\\tests\\Test_TicTacToe.cpp.obj"
+},
+{
+  "directory": "D:/Project_testing/Github/Tic_Tac_Toe/build",
+  "command": "C:\\msys64\\mingw64\\bin\\c++.exe -ID:/Project_testing/Github/Tic_Tac_Toe/include -isystem D:/Project_testing/Github/Tic_Tac_Toe/googletest/googletest/include -isystem D:/Project_testing/Github/Tic_Tac_Toe/googletest/googletest -g -std=gnu++17 -o CMakeFiles\\runIntegrationTests.dir\\tests\\Integration_Test.cpp.obj -c D:\\Project_testing\\Github\\Tic_Tac_Toe\\tests\\Integration_Test.cpp",
+  "file": "D:\\Project_testing\\Github\\Tic_Tac_Toe\\tests\\Integration_Test.cpp",
+  "output": "CMakeFiles\\runIntegrationTests.dir\\tests\\Integration_Test.cpp.obj"
+},
+{
+  "directory": "D:/Project_testing/Github/Tic_Tac_Toe/build",
+  "command": "C:\\msys64\\mingw64\\bin\\c++.exe -ID:/Project_testing/Github/Tic_Tac_Toe/include -ID:/Project_testing/Github/Tic_Tac_Toe/googletest/googlemock/include -ID:/Project_testing/Github/Tic_Tac_Toe/googletest/googlemock -isystem D:/Project_testing/Github/Tic_Tac_Toe/googletest/googletest/include -isystem D:/Project_testing/Github/Tic_Tac_Toe/googletest/googletest -g -std=c++17 -Wall -Wshadow -Wundef -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=0 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -o googletest\\googlemock\\CMakeFiles\\gmock.dir\\src\\gmock-all.cc.obj -c D:\\Project_testing\\Github\\Tic_Tac_Toe\\googletest\\googlemock\\src\\gmock-all.cc",
+  "file": "D:\\Project_testing\\Github\\Tic_Tac_Toe\\googletest\\googlemock\\src\\gmock-all.cc",
+  "output": "googletest\\googlemock\\CMakeFiles\\gmock.dir\\src\\gmock-all.cc.obj"
+},
+{
+  "directory": "D:/Project_testing/Github/Tic_Tac_Toe/build",
+  "command": "C:\\msys64\\mingw64\\bin\\c++.exe -isystem D:/Project_testing/Github/Tic_Tac_Toe/include -isystem D:/Project_testing/Github/Tic_Tac_Toe/googletest/googlemock/include -isystem D:/Project_testing/Github/Tic_Tac_Toe/googletest/googlemock -isystem D:/Project_testing/Github/Tic_Tac_Toe/googletest/googletest/include -isystem D:/Project_testing/Github/Tic_Tac_Toe/googletest/googletest -g -std=c++17 -Wall -Wshadow -Wundef -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=0 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -o googletest\\googlemock\\CMakeFiles\\gmock_main.dir\\src\\gmock_main.cc.obj -c D:\\Project_testing\\Github\\Tic_Tac_Toe\\googletest\\googlemock\\src\\gmock_main.cc",
+  "file": "D:\\Project_testing\\Github\\Tic_Tac_Toe\\googletest\\googlemock\\src\\gmock_main.cc",
+  "output": "googletest\\googlemock\\CMakeFiles\\gmock_main.dir\\src\\gmock_main.cc.obj"
+},
+{
+  "directory": "D:/Project_testing/Github/Tic_Tac_Toe/build",
+  "command": "C:\\msys64\\mingw64\\bin\\c++.exe -ID:/Project_testing/Github/Tic_Tac_Toe/include -ID:/Project_testing/Github/Tic_Tac_Toe/googletest/googletest/include -ID:/Project_testing/Github/Tic_Tac_Toe/googletest/googletest -g -std=c++17 -Wall -Wshadow -Wundef -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=0 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -o googletest\\googletest\\CMakeFiles\\gtest.dir\\src\\gtest-all.cc.obj -c D:\\Project_testing\\Github\\Tic_Tac_Toe\\googletest\\googletest\\src\\gtest-all.cc",
+  "file": "D:\\Project_testing\\Github\\Tic_Tac_Toe\\googletest\\googletest\\src\\gtest-all.cc",
+  "output": "googletest\\googletest\\CMakeFiles\\gtest.dir\\src\\gtest-all.cc.obj"
+},
+{
+  "directory": "D:/Project_testing/Github/Tic_Tac_Toe/build",
+  "command": "C:\\msys64\\mingw64\\bin\\c++.exe -ID:/Project_testing/Github/Tic_Tac_Toe/include -isystem D:/Project_testing/Github/Tic_Tac_Toe/googletest/googletest/include -isystem D:/Project_testing/Github/Tic_Tac_Toe/googletest/googletest -g -std=c++17 -Wall -Wshadow -Wundef -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=0 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -o googletest\\googletest\\CMakeFiles\\gtest_main.dir\\src\\gtest_main.cc.obj -c D:\\Project_testing\\Github\\Tic_Tac_Toe\\googletest\\googletest\\src\\gtest_main.cc",
+  "file": "D:\\Project_testing\\Github\\Tic_Tac_Toe\\googletest\\googletest\\src\\gtest_main.cc",
+  "output": "googletest\\googletest\\CMakeFiles\\gtest_main.dir\\src\\gtest_main.cc.obj"
+}
+]
