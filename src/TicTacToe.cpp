@@ -1,7 +1,10 @@
 // tic_tac_toe.cpp
 
 #include "TicTacToe.hpp"
-
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+#include <cstring>
 using namespace std;
 
 // Function to count empty spaces in symbols array
