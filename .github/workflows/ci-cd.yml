@@ -74,10 +74,10 @@ jobs:
           cd build
           ./runIntegrationTests
 
-deploy:
-  needs: test
-  runs-on: ubuntu-latest
-  steps:
+  deploy:
+   needs: test
+   runs-on: ubuntu-latest
+   steps:
     - name: Checkout code
       uses: actions/checkout@v2
 
@@ -105,3 +105,4 @@ deploy:
     - name: Run the executable
       run: |
         /path/to/deployment/directory/TicTacToe
+
