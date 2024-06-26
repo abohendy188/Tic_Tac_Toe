@@ -19,7 +19,10 @@ enable_testing()
 add_subdirectory(googletest)
 
 # Add unit tests
-add_executable(runUnitTests tests/Test_TicTacToe.cpp)
+add_executable(runUnitTests
+    tests/Test_TicTacToe.cpp
+    src/TicTacToe.cpp  # Add this line to link TicTacToe.cpp with the tests
+)
 target_link_libraries(runUnitTests gtest gtest_main)
 
 # Add integration tests
