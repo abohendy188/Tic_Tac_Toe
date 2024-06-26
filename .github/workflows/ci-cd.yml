@@ -92,6 +92,9 @@ jobs:
           name: build-output
           path: build/
 
+      - name: List build directory contents after download
+        run: ls -l build
+
       - name: Create deployment directory
         run: |
           mkdir -p $GITHUB_WORKSPACE/deployment/directory
