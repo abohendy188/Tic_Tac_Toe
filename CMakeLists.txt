@@ -16,7 +16,7 @@ add_executable(TicTacToe
 
 # Add Google Test
 enable_testing()
-add_subdirectory(external/googletest)
+add_subdirectory(googletest)
 
 # Add unit tests
 add_executable(runUnitTests tests/Test_TicTacToe.cpp)
