@@ -74,30 +74,34 @@ jobs:
           cd build
           ./runIntegrationTests
 
-  deploy:
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+ deploy:
+  needs: test
+  runs-on: ubuntu-latest
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Install dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y cmake g++ make
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y cmake g++ make
 
-      - name: Build project
-        run: |
-          mkdir build
-          cd build
-          cmake ..
-          make
+    - name: Build project
+      run: |
+        mkdir build
+        cd build
+        cmake ..
+        make
 
-      - name: Create executable
-        run: |
-          cd build
-          cp TicTacToe /path/to/deployment/directory/TicTacToe
+    - name: Create deployment directory
+      run: |
+        mkdir -p /path/to/deployment/directory
 
-      - name: Run the executable
-        run: |
-          /path/to/deployment/directory/TicTacToe
+    - name: Create executable
+      run: |
+        cd build
+        cp TicTacToe /path/to/deployment/directory/TicTacToe
+
+    - name: Run the executable
+      run: |
+        /path/to/deployment/directory/TicTacToe
