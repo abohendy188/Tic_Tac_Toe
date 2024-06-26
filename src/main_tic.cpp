@@ -1,6 +1,6 @@
 // main.cpp
 
-#include "TicTacToe.cpp"
+#include "TicTacToe.hpp"
 int main() {
     playGame();
     return 0;
