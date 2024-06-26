@@ -52,37 +52,36 @@ void drawBoard(const char symbols[3][3]) {
 //3-------function to choose the playmode 
 int choose_play_mode() {
     int mode;
-    cout << "What mode you want to play?" << endl << "Enter:\n0 for two players mode\n1 to play with the computer\n";
-    do
-    {
-       cin >> mode;
-       if((0==mode) || (1 == mode))
-       {
-        break ;
-       }
-       else if((0!=mode) || (1 != mode)) 
-       {
-        cout<< "Please Enter Valid Inputs ,\" 0-> for two players mode & 1-> to play with the computer \" \n";
-       }
-    } while ((mode!=0) || (mode!=1));
-    
-    
+    std::cout << "What mode you want to play?" << std::endl << "Enter:\n0 for two players mode\n1 to play with the computer\n";
+    while (true) {
+        std::cin >> mode;
+        if (mode == 0 || mode == 1) {
+            break;
+        } else {
+            std::cout << "Please Enter Valid Inputs ,\" 0-> for two players mode & 1-> to play with the computer \" \n";
+        }
+    }
     return mode;
 }
 
 //4------function to get the player symbol for two players mode
 void get_two_player_symbols(char &player_one, char &player_two) {
-    cout << "Player 1 should choose what symbol to play with!, \" Press X or O \" \n";
-    cin >> player_one;
-    cin.ignore();
-    if (player_one == 'X' || player_one == 'x') {
-        player_two = 'O';
-        cout<< "Now Player 1 is \" X \" and Player 2 is \" O \" \n";
-    } else {
-        player_two = 'X';
-        player_one = 'O' ;
-        cout<< "Now Player 1 is \" O \" and Player 2 is \" X \" \n";
+    std::cout << "Player 1 should choose what symbol to play with!, \" Press X or O \" \n";
+    while (true) {
+        std::cin >> player_one;
+        if (player_one == 'X' || player_one == 'x') {
+            player_one = 'X';
+            player_two = 'O';
+            break;
+        } else if (player_one == 'O' || player_one == 'o') {
+            player_one = 'O';
+            player_two = 'X';
+            break;
+        } else {
+            std::cout << "Invalid choice. Please press X or O.\n";
+        }
     }
+    std::cout << "Now Player 1 is \"" << player_one << "\" and Player 2 is \"" << player_two << "\" \n";
 }
 
 //5------Function to check the win
@@ -298,56 +297,52 @@ int miniMax(char symbols[][3], bool isMaximizing, bool firstTime) {
 
 //11-----------------function to play with AI
 void play_with_AI(int &rowIndex, int &colIndex, int &result, char symbols[][3], int &gameLevel) {
-    bool valid_place = true ;
-    cout << "Choose the level, (1-Easy\t2-Immediate\t3-Impossible): ";
-    cin >> gameLevel;
+    bool valid_place = true;
+    std::cout << "Choose the level, (1-Easy\t2-Immediate\t3-Impossible): ";
+    std::cin >> gameLevel;
 
     if (gameLevel == 1) {
-        cout << "You are playing at the easy level\n";
+        std::cout << "You are playing at the easy level\n";
     } else if (gameLevel == 2) {
-        cout << "You are playing at the medium level\n";
+        std::cout << "You are playing at the medium level\n";
     } else if (gameLevel == 3) {
-        cout << "You are playing at the hard level\n";
+        std::cout << "You are playing at the hard level\n";
     } else {
         gameLevel = 1;
-        cout << "Invalid level choice, defaulting to easy level\n";
+        std::cout << "Invalid level choice, defaulting to easy level\n";
     }
+    drawBoard(symbols);
     while (true) {
-         do
-        {
-        cout << "Enter the row number and the column number respectively\n";
-        cin >> rowIndex >> colIndex;
+        do {
+            std::cout << "Enter the row number and the column number respectively\n";
+            std::cin >> rowIndex >> colIndex;
 
-        rowIndex--;
-        colIndex--;
-        if (((rowIndex<0) || (rowIndex>2) || (colIndex<0)  || (colIndex>2) ) || ((symbols[rowIndex][colIndex] == 'X') || (symbols[rowIndex][colIndex] == 'x') || (symbols[rowIndex][colIndex] == 'O') ) )
-        {
-            valid_place= false ;
-            cout << "Please choose an empty place to place your symbol.\n";
-        } 
-        else 
-        {
-            valid_place = true;
-        }
-        } while (false == valid_place);
+            rowIndex--;
+            colIndex--;
+            if ((rowIndex < 0 || rowIndex > 2 || colIndex < 0 || colIndex > 2) || 
+                (symbols[rowIndex][colIndex] == 'X' || symbols[rowIndex][colIndex] == 'x' || symbols[rowIndex][colIndex] == 'O')) {
+                valid_place = false;
+                std::cout << "Please choose an empty place to place your symbol.\n";
+            } else {
+                valid_place = true;
+            }
+        } while (!valid_place);
 
         symbols[rowIndex][colIndex] = 'X';
-        if (exitGame(symbols))
-            break;
+        if (exitGame(symbols)) break;
 
         if (gameLevel == 1) {
             getRandomMove(symbols);
         } else if (gameLevel == 2) {
             getComputerMove(symbols);
         } else if (gameLevel == 3) {
-            // apply minimax and get AI move
-            int move = miniMax(symbols, false);
+            miniMax(symbols, false, true);
         }
         drawBoard(symbols);
-        if (exitGame(symbols))
-           break;
+        if (exitGame(symbols)) break;
     }
 }
+
 //-----------------------------------------------------------------------------------------------
 //12-------------------functio to Two players mode
 void Two_players_mode(int &rowIndex, int &colIndex, int &result, char symbols[][3]) {
