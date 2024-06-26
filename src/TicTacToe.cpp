@@ -31,29 +31,18 @@ void initArray(char symbols[][3])
 }
 
 // 2-----function to draw the board
-// void drawBoard(const char symbols[3][3])
-//  {
-//     system("cls");
-//     cout << "\t\t\t\t\t\t" << " " << symbols[0][0] << " | " << symbols[0][1] << " | " << symbols[0][2] << endl;
-//     cout << "\t\t\t\t\t\t" << "-----------" << endl;
-//     cout << "\t\t\t\t\t\t" << " " << symbols[1][0] << " | " << symbols[1][1] << " | " << symbols[1][2] << endl;
-//     cout << "\t\t\t\t\t\t" << "-----------" << endl;
-//     cout << "\t\t\t\t\t\t" << " " << symbols[2][0] << " | " << symbols[2][1] << " | " << symbols[2][2] << endl;
-//     cout << "\n\n\n\n";
-// }
-
-std::string drawBoard(const char board[3][3]) {
-    std::string boardStr = "\n\t\t\t\t\t\t";
-    for (int row = 0; row < 3; ++row) {
-        for (int col = 0; col < 3; ++col) {
-            boardStr += board[row][col];
-            if (col < 2) boardStr += " | ";
-        }
-        if (row < 2) boardStr += "\n\t\t\t\t\t\t-----------\n\t\t\t\t\t\t";
-    }
-    boardStr += "\n\n\n\n\n";
-    return boardStr;
+void drawBoard(const char symbols[3][3])
+ {
+    system("cls");
+    cout << "\t\t\t\t\t\t" << " " << symbols[0][0] << " | " << symbols[0][1] << " | " << symbols[0][2] << endl;
+    cout << "\t\t\t\t\t\t" << "-----------" << endl;
+    cout << "\t\t\t\t\t\t" << " " << symbols[1][0] << " | " << symbols[1][1] << " | " << symbols[1][2] << endl;
+    cout << "\t\t\t\t\t\t" << "-----------" << endl;
+    cout << "\t\t\t\t\t\t" << " " << symbols[2][0] << " | " << symbols[2][1] << " | " << symbols[2][2] << endl;
+    cout << "\n\n\n\n";
 }
+
+
 
 //3-------function to choose the playmode 
 int choose_play_mode() {
