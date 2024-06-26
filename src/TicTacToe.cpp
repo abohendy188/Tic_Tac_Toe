@@ -31,15 +31,20 @@ void initArray(char symbols[][3])
 }
 
 // 2-----function to draw the board
-void drawBoard(const char symbols[3][3])
- {
-    system("cls");
-    cout << "\t\t\t\t\t\t" << " " << symbols[0][0] << " | " << symbols[0][1] << " | " << symbols[0][2] << endl;
-    cout << "\t\t\t\t\t\t" << "-----------" << endl;
-    cout << "\t\t\t\t\t\t" << " " << symbols[1][0] << " | " << symbols[1][1] << " | " << symbols[1][2] << endl;
-    cout << "\t\t\t\t\t\t" << "-----------" << endl;
-    cout << "\t\t\t\t\t\t" << " " << symbols[2][0] << " | " << symbols[2][1] << " | " << symbols[2][2] << endl;
-    cout << "\n\n\n\n";
+void drawBoard(const char symbols[3][3]) {
+    // Clear the console screen based on the operating system
+    #ifdef _WIN32
+        system("cls");
+    #else
+        system("clear");
+    #endif
+
+    std::cout << "\t\t\t\t\t\t" << " " << symbols[0][0] << " | " << symbols[0][1] << " | " << symbols[0][2] << std::endl;
+    std::cout << "\t\t\t\t\t\t" << "-----------" << std::endl;
+    std::cout << "\t\t\t\t\t\t" << " " << symbols[1][0] << " | " << symbols[1][1] << " | " << symbols[1][2] << std::endl;
+    std::cout << "\t\t\t\t\t\t" << "-----------" << std::endl;
+    std::cout << "\t\t\t\t\t\t" << " " << symbols[2][0] << " | " << symbols[2][1] << " | " << symbols[2][2] << std::endl;
+    std::cout << "\n\n\n\n";
 }
 
 
