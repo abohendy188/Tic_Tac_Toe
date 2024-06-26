@@ -18,7 +18,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y cmake g++ make git
+          sudo apt-get install -y cmake g++ make
 
       - name: Setup Google Test
         run: |
@@ -45,6 +45,12 @@ jobs:
           cmake ..
           make
 
+      - name: Archive build output
+        uses: actions/upload-artifact@v2
+        with:
+          name: build-output
+          path: build/
+
   test:
     needs: build
     runs-on: ubuntu-latest
@@ -57,12 +63,11 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y cmake g++ make
 
-      - name: Build project
-        run: |
-          mkdir build
-          cd build
-          cmake ..
-          make
+      - name: Download build output
+        uses: actions/download-artifact@v2
+        with:
+          name: build-output
+          path: build/
 
       - name: Run unit tests
         run: |
@@ -75,34 +80,31 @@ jobs:
           ./runIntegrationTests
 
   deploy:
-   needs: test
-   runs-on: ubuntu-latest
-   steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Install dependencies
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y cmake g++ make
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake g++ make
 
-    - name: Build project
-      run: |
-        mkdir build
-        cd build
-        cmake ..
-        make
+      - name: Download build output
+        uses: actions/download-artifact@v2
+        with:
+          name: build-output
+          path: build/
 
-    - name: Create deployment directory
-      run: |
-        mkdir -p $GITHUB_WORKSPACE/deployment/directory
+      - name: Create deployment directory
+        run: |
+          mkdir -p $GITHUB_WORKSPACE/deployment/directory
 
-    - name: Create executable
-      run: |
-        cd build
-        cp TicTacToe $GITHUB_WORKSPACE/deployment/directory/TicTacToe
+      - name: Create executable
+        run: |
+          cp build/TicTacToe $GITHUB_WORKSPACE/deployment/directory/TicTacToe
 
-    - name: Run the executable
-      run: |
-        $GITHUB_WORKSPACE/deployment/directory/TicTacToe
-
+      - name: Run the executable
+        run: |
+          $GITHUB_WORKSPACE/deployment/directory/TicTacToe
