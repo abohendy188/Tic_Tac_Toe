@@ -3,10 +3,7 @@
 #ifndef TIC_TAC_TOE_H
 #define TIC_TAC_TOE_H
 
-#include <iostream>
-#include <cstdlib>
-#include <ctime>
-#include <cstring>
+
 
 int calculateEmptyCount(const char symbols[3][3]);
 void initArray(char symbols[][3]);
