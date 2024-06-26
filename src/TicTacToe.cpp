@@ -5,6 +5,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <cstring>
+
 using namespace std;
 
 // Function to count empty spaces in symbols array
@@ -19,56 +20,50 @@ int calculateEmptyCount(const char symbols[3][3]) {
     }
     return count;
 }
-//----------------Functions----------------------------------------------------------
 
-
-// 1------- function to initialize the array of symbols by space character(as a sign for being empty).
-void initArray(char symbols[][3])
- {
+// Function to initialize the array of symbols by space character(as a sign for being empty).
+void initArray(char symbols[][3]) {
     for (int counter_1 = 0; counter_1 < 3; counter_1++)
         for (int counter_2 = 0; counter_2 < 3; counter_2++)
             symbols[counter_1][counter_2] = ' ';
 }
 
-// 2-----function to draw the board
+// Function to draw the board
 void drawBoard(const char symbols[3][3]) {
-    // Clear the console screen based on the operating system
     #ifdef _WIN32
         system("cls");
     #else
         system("clear");
     #endif
 
-    std::cout << "\t\t\t\t\t\t" << " " << symbols[0][0] << " | " << symbols[0][1] << " | " << symbols[0][2] << std::endl;
-    std::cout << "\t\t\t\t\t\t" << "-----------" << std::endl;
-    std::cout << "\t\t\t\t\t\t" << " " << symbols[1][0] << " | " << symbols[1][1] << " | " << symbols[1][2] << std::endl;
-    std::cout << "\t\t\t\t\t\t" << "-----------" << std::endl;
-    std::cout << "\t\t\t\t\t\t" << " " << symbols[2][0] << " | " << symbols[2][1] << " | " << symbols[2][2] << std::endl;
-    std::cout << "\n\n\n\n";
+    cout << "\t\t\t\t\t\t" << " " << symbols[0][0] << " | " << symbols[0][1] << " | " << symbols[0][2] << endl;
+    cout << "\t\t\t\t\t\t" << "-----------" << endl;
+    cout << "\t\t\t\t\t\t" << " " << symbols[1][0] << " | " << symbols[1][1] << " | " << symbols[1][2] << endl;
+    cout << "\t\t\t\t\t\t" << "-----------" << endl;
+    cout << "\t\t\t\t\t\t" << " " << symbols[2][0] << " | " << symbols[2][1] << " | " << symbols[2][2] << endl;
+    cout << "\n\n\n\n";
 }
 
-
-
-//3-------function to choose the playmode 
+// Function to choose the play mode
 int choose_play_mode() {
     int mode;
-    std::cout << "What mode you want to play?" << std::endl << "Enter:\n0 for two players mode\n1 to play with the computer\n";
+    cout << "What mode you want to play?" << endl << "Enter:\n0 for two players mode\n1 to play with the computer\n";
     while (true) {
-        std::cin >> mode;
+        cin >> mode;
         if (mode == 0 || mode == 1) {
             break;
         } else {
-            std::cout << "Please Enter Valid Inputs ,\" 0-> for two players mode & 1-> to play with the computer \" \n";
+            cout << "Please Enter Valid Inputs ,\" 0-> for two players mode & 1-> to play with the computer \" \n";
         }
     }
     return mode;
 }
 
-//4------function to get the player symbol for two players mode
+// Function to get the player symbol for two players mode
 void get_two_player_symbols(char &player_one, char &player_two) {
-    std::cout << "Player 1 should choose what symbol to play with!, \" Press X or O \" \n";
+    cout << "Player 1 should choose what symbol to play with!, \" Press X or O \" \n";
     while (true) {
-        std::cin >> player_one;
+        cin >> player_one;
         if (player_one == 'X' || player_one == 'x') {
             player_one = 'X';
             player_two = 'O';
@@ -78,13 +73,13 @@ void get_two_player_symbols(char &player_one, char &player_two) {
             player_two = 'X';
             break;
         } else {
-            std::cout << "Invalid choice. Please press X or O.\n";
+            cout << "Invalid choice. Please press X or O.\n";
         }
     }
-    std::cout << "Now Player 1 is \"" << player_one << "\" and Player 2 is \"" << player_two << "\" \n";
+    cout << "Now Player 1 is \"" << player_one << "\" and Player 2 is \"" << player_two << "\" \n";
 }
 
-//5------Function to check the win
+// Function to check the win
 int checkWin(const char symbols[][3]) {
     // check the rows
     for (int counter = 0; counter < 3; counter++)
@@ -114,7 +109,7 @@ int checkWin(const char symbols[][3]) {
         return 1;
 }
 
-//6----function to check if the game ended.
+// Function to check if the game ended.
 bool exitGame(const char symbols[][3]) {
     int result = checkWin(symbols);
     if (result == 2 ) {
@@ -132,7 +127,7 @@ bool exitGame(const char symbols[][3]) {
     return false;
 }
 
-//7---------------Function to check the win in case of two players
+// Function to check the win in case of two players
 int checkWin_Two_Players(const char symbols[][3], char player_one, char player_two) {
     // check the rows
     for (int counter = 0; counter < 3; counter++)
@@ -162,13 +157,10 @@ int checkWin_Two_Players(const char symbols[][3], char player_one, char player_t
         return 1;
 }
 
+// AI algorithm function
 
-//----------------------AI algorithm function-------------------------------------
-
-//8-------------------The easy level function-----------------------------------------------
+// The easy level function
 void getRandomMove(char symbols[][3]) {
-    // then if no blocking or winning ya hendo, we will generate a random value
-
     int availableMoves[9][2];  // 2D array of 9 elements
 
     for (int counter_1 = 0; counter_1 < 9; counter_1++)
@@ -177,19 +169,15 @@ void getRandomMove(char symbols[][3]) {
 
     int moveCount = 0;
 
-    for (int counter_1 = 0; counter_1 < 3; counter_1++)
-    {
-        for (int counter_2 = 0; counter_2 < 3; counter_2++)
-        {
-            if (symbols[counter_1][counter_2] == ' ')
-            {
+    for (int counter_1 = 0; counter_1 < 3; counter_1++) {
+        for (int counter_2 = 0; counter_2 < 3; counter_2++) {
+            if (symbols[counter_1][counter_2] == ' ') {
                 availableMoves[moveCount][0] = counter_1;
                 availableMoves[moveCount][1] = counter_2;
                 moveCount++;
             }
         }
     }
-    // notice that the condition below is to make sure that if moveCount = 0, then the function will return to avoid division by zero
     if (moveCount == 0) {
         return;
     }
