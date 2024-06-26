@@ -95,14 +95,14 @@ jobs:
 
     - name: Create deployment directory
       run: |
-        mkdir -p /path/to/deployment/directory
+        mkdir -p $GITHUB_WORKSPACE/deployment/directory
 
     - name: Create executable
       run: |
         cd build
-        cp TicTacToe /path/to/deployment/directory/TicTacToe
+        cp TicTacToe $GITHUB_WORKSPACE/deployment/directory/TicTacToe
 
     - name: Run the executable
       run: |
-        /path/to/deployment/directory/TicTacToe
+        $GITHUB_WORKSPACE/deployment/directory/TicTacToe
 
