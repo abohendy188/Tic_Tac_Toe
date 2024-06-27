@@ -75,34 +75,32 @@ jobs:
           ./runIntegrationTests
 
   deploy:
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+   needs: test
+   runs-on: ubuntu-latest
+   steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Restore build cache
-        uses: actions/cache@v2
-        with:
-          path: build
-          key: ${{ runner.os }}-build-${{ hashFiles('**/*') }}
-          restore-keys: |
-            ${{ runner.os }}-build-
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y cmake g++ make
 
-      - name: Create deployment directory
-        run: |
-          mkdir -p $GITHUB_WORKSPACE/deployment/directory
+    - name: Build project
+      run: |
+        mkdir build
+        cd build
+        cmake ..
+        make
 
-      - name: Create executable
-        run: |
-          cd build
-          cp TicTacToe $GITHUB_WORKSPACE/deployment/directory/TicTacToe
+    - name: Create deployment directory
+      run: |
+        mkdir -p $GITHUB_WORKSPACE/deployment/directory
 
-      - name: Archive deployment files
-        uses: actions/upload-artifact@v2
-        with:
-          name: TicTacToe
-          path: $GITHUB_WORKSPACE/deployment/directory/TicTacToe
+    - name: Create executable
+      run: |
+        cd build
+        cp TicTacToe $GITHUB_WORKSPACE/deployment/directory/TicTacToe
 
     - name: Run the executable
       run: |
