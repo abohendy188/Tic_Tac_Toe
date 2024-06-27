@@ -1,5 +1,206 @@
 // tic_tac_toe.cpp
 
+// #include "TicTacToe.hpp"
+// #include <iostream>
+// #include <cstdlib>
+// #include <ctime>
+// #include <cstring>
+
+// using namespace std;
+
+// // Function to count empty spaces in symbols array
+// int calculateEmptyCount(const char symbols[3][3]) {
+//     int count = 0;
+//     for (int i = 0; i < 3; ++i) {
+//         for (int j = 0; j < 3; ++j) {
+//             if (symbols[i][j] == ' ') {
+//                 count++;
+//             }
+//         }
+//     }
+//     return count;
+// }
+
+// // Function to initialize the array of symbols by space character(as a sign for being empty).
+// void initArray(char symbols[][3]) {
+//     for (int counter_1 = 0; counter_1 < 3; counter_1++)
+//         for (int counter_2 = 0; counter_2 < 3; counter_2++)
+//             symbols[counter_1][counter_2] = ' ';
+// }
+
+// // Function to draw the board
+// void drawBoard(const char symbols[3][3]) {
+//     #ifdef _WIN32
+//         system("cls");
+//     #else
+//         system("clear");
+//     #endif
+
+//     cout << "\t\t\t\t\t\t" << " " << symbols[0][0] << " | " << symbols[0][1] << " | " << symbols[0][2] << endl;
+//     cout << "\t\t\t\t\t\t" << "-----------" << endl;
+//     cout << "\t\t\t\t\t\t" << " " << symbols[1][0] << " | " << symbols[1][1] << " | " << symbols[1][2] << endl;
+//     cout << "\t\t\t\t\t\t" << "-----------" << endl;
+//     cout << "\t\t\t\t\t\t" << " " << symbols[2][0] << " | " << symbols[2][1] << " | " << symbols[2][2] << endl;
+//     cout << "\n\n\n\n";
+// }
+
+// // Function to choose the play mode
+// int choose_play_mode() {
+//     int mode;
+//     cout << "What mode you want to play?" << endl << "Enter:\n0 for two players mode\n1 to play with the computer\n";
+//     while (true) {
+//         cin >> mode;
+//         if (mode == 0 || mode == 1) {
+//             break;
+//         } else {
+//             cout << "Please Enter Valid Inputs ,\" 0-> for two players mode & 1-> to play with the computer \" \n";
+//         }
+//     }
+//     return mode;
+// }
+
+// // Function to get the player symbol for two players mode
+// void get_two_player_symbols(char &player_one, char &player_two) {
+//     cout << "Player 1 should choose what symbol to play with!, \" Press X or O \" \n";
+//     while (true) {
+//         cin >> player_one;
+//         if (player_one == 'X' || player_one == 'x') {
+//             player_one = 'X';
+//             player_two = 'O';
+//             break;
+//         } else if (player_one == 'O' || player_one == 'o') {
+//             player_one = 'O';
+//             player_two = 'X';
+//             break;
+//         } else {
+//             cout << "Invalid choice. Please press X or O.\n";
+//         }
+//     }
+//     cout << "Now Player 1 is \"" << player_one << "\" and Player 2 is \"" << player_two << "\" \n";
+// }
+
+
+// // Function to check the win
+// int checkWin(const char symbols[][3]) {
+//     // check the rows
+//     for (int counter = 0; counter < 3; counter++)
+//         if (symbols[counter][0] != ' ' && symbols[counter][0] == symbols[counter][1] && symbols[counter][0] == symbols[counter][2])
+//             return (symbols[counter][0] == 'X' ? 2 : -2);
+
+//     // check the columns
+//     for (int counter = 0; counter < 3; counter++)
+//         if (symbols[0][counter] != ' ' && symbols[0][counter] == symbols[1][counter] && symbols[0][counter] == symbols[2][counter])
+//             return (symbols[0][counter] == 'X' ? 2 : -2);
+
+//     // check the diagonal
+//     if (symbols[0][0] != ' ' && symbols[0][0] == symbols[1][1] && symbols[0][0] == symbols[2][2]) {
+//         return (symbols[0][0] == 'X' ? 2 : -2);
+//     }
+//     if (symbols[0][2] != ' ' && symbols[0][2] == symbols[1][1] && symbols[0][2] == symbols[2][0]) {
+//         return (symbols[0][2] == 'X' ? 2 : -2);
+//     }
+//     bool tie = true;
+//     for (int counter_1 = 0; counter_1 < 3; counter_1++)
+//         for (int counter_2 = 0; counter_2 < 3; counter_2++)
+//             if (symbols[counter_1][counter_2] == ' ')
+//                 tie = false;
+//     if (tie)
+//         return 0;
+//     else
+//         return 1;
+// }
+
+// // Function to check if the game ended.
+// bool exitGame(const char symbols[][3]) {
+//     int result = checkWin(symbols);
+//     if (result == 2 ) {
+//         cout << "Congratulation! You win.\n";
+//         return true;
+//     }
+//     if (result == -2) {
+//         cout << "Sorry! You loss.\n";
+//         return true;
+//     }
+//     if (result == 0) {
+//         cout << "No winner, it is a tie.\n";
+//         return true;
+//     }
+//     return false;
+// }
+
+// // Function to check the win in case of two players
+// int checkWin_Two_Players(const char symbols[][3], char player_one, char player_two) {
+//     // check the rows
+//     for (int counter = 0; counter < 3; counter++)
+//         if (symbols[counter][0] != ' ' && symbols[counter][0] == symbols[counter][1] && symbols[counter][0] == symbols[counter][2])
+//             return (symbols[counter][0] == player_one ? 2 : -2);
+
+//     // check the columns
+//     for (int counter = 0; counter < 3; counter++)
+//         if (symbols[0][counter] != ' ' && symbols[0][counter] == symbols[1][counter] && symbols[0][counter] == symbols[2][counter])
+//             return (symbols[0][counter] == player_one ? 2 : -2);
+
+//     // check the diagonal
+//     if (symbols[0][0] != ' ' && symbols[0][0] == symbols[1][1] && symbols[0][0] == symbols[2][2]) {
+//         return (symbols[0][0] == player_one ? 2 : -2);
+//     }
+//     if (symbols[0][2] != ' ' && symbols[0][2] == symbols[1][1] && symbols[0][2] == symbols[2][0]) {
+//         return (symbols[0][2] == player_one ? 2 : -2);
+//     }
+//     bool tie = true;
+//     for (int counter_1 = 0; counter_1 < 3; counter_1++)
+//         for (int counter_2 = 0; counter_2 < 3; counter_2++)
+//             if (symbols[counter_1][counter_2] == ' ')
+//                 tie = false;
+//     if (tie)
+//         return 0;
+//     else
+//         return 1;
+// }
+
+// // AI algorithm function
+
+// // The easy level function
+// void getRandomMove(char symbols[][3]) {
+//     int availableMoves[9][2];  // 2D array of 9 elements
+
+//     for (int counter_1 = 0; counter_1 < 9; counter_1++)
+//         for (int counter_2 = 0; counter_2 < 2; counter_2++)
+//             availableMoves[counter_1][counter_2] = -1;  // Initialize with -1
+
+//     int moveCount = 0;
+
+//     for (int counter_1 = 0; counter_1 < 3; counter_1++) {
+//         for (int counter_2 = 0; counter_2 < 3; counter_2++) {
+//             if (symbols[counter_1][counter_2] == ' ') {
+//                 availableMoves[moveCount][0] = counter_1;
+//                 availableMoves[moveCount][1] = counter_2;
+//                 moveCount++;
+//             }
+//         }
+//     }
+//     if (moveCount == 0) {
+//         return;
+//     }
+//     srand(static_cast<unsigned int>(time(0)));
+//     int randomIndex = rand() % moveCount; // this line of code can make some issues
+//     symbols[availableMoves[randomIndex][0]][availableMoves[randomIndex][1]] = 'O';
+// }
+
+
+
+// // 9------------The meduim level function----------------------------------------
+// void getComputerMove(char symbols[3][3]) {
+//     // here I will not ask to cin >> any thing, as computer will analyze the state of the game, and determine the suitable action
+//     int counter_1, counter_2;
+//     // check for winning move
+//     for (counter_1 = 0; counter_1 < 3; counter_1++) {
+//         for (counter_2 = 0; counter_2 < 3; counter_2++) {
+//             if (symbols[counter_1][counter_2] == ' ') {
+//                 //char tempSymbol[3][3];
+//                 //memcpy(tempSymbol, symbols, sizeof(symbols));
+//                 symbols[counter_1][counter_2] = 'O';
+//                 if (checkWin(symbols) == -2) {
 #include "TicTacToe.hpp"
 #include <iostream>
 #include <cstdlib>
@@ -8,27 +209,12 @@
 
 using namespace std;
 
-// Function to count empty spaces in symbols array
-int calculateEmptyCount(const char symbols[3][3]) {
-    int count = 0;
-    for (int i = 0; i < 3; ++i) {
-        for (int j = 0; j < 3; ++j) {
-            if (symbols[i][j] == ' ') {
-                count++;
-            }
-        }
-    }
-    return count;
-}
-
-// Function to initialize the array of symbols by space character(as a sign for being empty).
 void initArray(char symbols[][3]) {
     for (int counter_1 = 0; counter_1 < 3; counter_1++)
         for (int counter_2 = 0; counter_2 < 3; counter_2++)
             symbols[counter_1][counter_2] = ' ';
 }
 
-// Function to draw the board
 void drawBoard(const char symbols[3][3]) {
     #ifdef _WIN32
         system("cls");
@@ -44,22 +230,22 @@ void drawBoard(const char symbols[3][3]) {
     cout << "\n\n\n\n";
 }
 
-// Function to choose the play mode
 int choose_play_mode() {
     int mode;
     cout << "What mode you want to play?" << endl << "Enter:\n0 for two players mode\n1 to play with the computer\n";
     while (true) {
         cin >> mode;
-        if (mode == 0 || mode == 1) {
-            break;
-        } else {
+        if (cin.fail() || (mode != 0 && mode != 1)) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
             cout << "Please Enter Valid Inputs ,\" 0-> for two players mode & 1-> to play with the computer \" \n";
+        } else {
+            break;
         }
     }
     return mode;
 }
 
-// Function to get the player symbol for two players mode
 void get_two_player_symbols(char &player_one, char &player_two) {
     cout << "Player 1 should choose what symbol to play with!, \" Press X or O \" \n";
     while (true) {
@@ -79,8 +265,6 @@ void get_two_player_symbols(char &player_one, char &player_two) {
     cout << "Now Player 1 is \"" << player_one << "\" and Player 2 is \"" << player_two << "\" \n";
 }
 
-
-// Function to check the win
 int checkWin(const char symbols[][3]) {
     // check the rows
     for (int counter = 0; counter < 3; counter++)
@@ -110,7 +294,6 @@ int checkWin(const char symbols[][3]) {
         return 1;
 }
 
-// Function to check if the game ended.
 bool exitGame(const char symbols[][3]) {
     int result = checkWin(symbols);
     if (result == 2 ) {
@@ -128,7 +311,6 @@ bool exitGame(const char symbols[][3]) {
     return false;
 }
 
-// Function to check the win in case of two players
 int checkWin_Two_Players(const char symbols[][3], char player_one, char player_two) {
     // check the rows
     for (int counter = 0; counter < 3; counter++)
@@ -158,9 +340,6 @@ int checkWin_Two_Players(const char symbols[][3], char player_one, char player_t
         return 1;
 }
 
-// AI algorithm function
-
-// The easy level function
 void getRandomMove(char symbols[][3]) {
     int availableMoves[9][2];  // 2D array of 9 elements
 
@@ -183,24 +362,28 @@ void getRandomMove(char symbols[][3]) {
         return;
     }
     srand(static_cast<unsigned int>(time(0)));
-    int randomIndex = rand() % moveCount; // this line of code can make some issues
+    int randomIndex = rand() % moveCount;
     symbols[availableMoves[randomIndex][0]][availableMoves[randomIndex][1]] = 'O';
 }
 
-
-
-// 9------------The meduim level function----------------------------------------
 void getComputerMove(char symbols[3][3]) {
-    // here I will not ask to cin >> any thing, as computer will analyze the state of the game, and determine the suitable action
-    int counter_1, counter_2;
-    // check for winning move
-    for (counter_1 = 0; counter_1 < 3; counter_1++) {
-        for (counter_2 = 0; counter_2 < 3; counter_2++) {
+    for (int counter_1 = 0; counter_1 < 3; counter_1++) {
+        for (int counter_2 = 0; counter_2 < 3; counter_2++) {
             if (symbols[counter_1][counter_2] == ' ') {
-                //char tempSymbol[3][3];
-                //memcpy(tempSymbol, symbols, sizeof(symbols));
                 symbols[counter_1][counter_2] = 'O';
                 if (checkWin(symbols) == -2) {
+                    return;
+                } else {
+                    symbols[counter_1][counter_2] = ' ';
+                }
+            }
+        }
+    }
+    for (int counter_1 = 0; counter_1 < 3; counter_1++) {
+        for (int counter_2 = 0; counter_2 < 3; counter_2++) {
+            if (symbols[counter_1][counter_2] == ' ') {
+                symbols[counter_1][counter_2] = 'X';
+                if (checkWin(symbols) == 2) {
                     symbols[counter_1][counter_2] = 'O';
                     //cout << "i'm from the 1st cond\n";
                     return;
