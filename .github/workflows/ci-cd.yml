@@ -102,6 +102,4 @@ jobs:
         cd build
         cp TicTacToe $GITHUB_WORKSPACE/deployment/directory/TicTacToe
 
-    - name: Run the executable
-      run: |
-        $GITHUB_WORKSPACE/deployment/directory/TicTacToe
+
