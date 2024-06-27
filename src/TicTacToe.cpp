@@ -22,61 +22,96 @@ int calculateEmptyCount(const char symbols[3][3]) {
 }
 
 // Function to initialize the array of symbols by space character(as a sign for being empty).
-void initArray(char symbols[][3]) {
-    for (int counter_1 = 0; counter_1 < 3; counter_1++)
-        for (int counter_2 = 0; counter_2 < 3; counter_2++)
-            symbols[counter_1][counter_2] = ' ';
+// void initArray(char symbols[][3]) {
+//     for (int counter_1 = 0; counter_1 < 3; counter_1++)
+//         for (int counter_2 = 0; counter_2 < 3; counter_2++)
+//             symbols[counter_1][counter_2] = ' ';
+// }
+
+// // Function to draw the board
+// void drawBoard(const char symbols[3][3]) {
+//     #ifdef _WIN32
+//         system("cls");
+//     #else
+//         system("clear");
+//     #endif
+
+//     cout << "\t\t\t\t\t\t" << " " << symbols[0][0] << " | " << symbols[0][1] << " | " << symbols[0][2] << endl;
+//     cout << "\t\t\t\t\t\t" << "-----------" << endl;
+//     cout << "\t\t\t\t\t\t" << " " << symbols[1][0] << " | " << symbols[1][1] << " | " << symbols[1][2] << endl;
+//     cout << "\t\t\t\t\t\t" << "-----------" << endl;
+//     cout << "\t\t\t\t\t\t" << " " << symbols[2][0] << " | " << symbols[2][1] << " | " << symbols[2][2] << endl;
+//     cout << "\n\n\n\n";
+// }
+
+// // Function to choose the play mode
+// int choose_play_mode() {
+//     int mode;
+//     cout << "What mode you want to play?" << endl << "Enter:\n0 for two players mode\n1 to play with the computer\n";
+//     while (true) {
+//         cin >> mode;
+//         if (mode == 0 || mode == 1) {
+//             break;
+//         } else {
+//             cout << "Please Enter Valid Inputs ,\" 0-> for two players mode & 1-> to play with the computer \" \n";
+//         }
+//     }
+//     return mode;
+// }
+
+// // Function to get the player symbol for two players mode
+// void get_two_player_symbols(char &player_one, char &player_two) {
+//     cout << "Player 1 should choose what symbol to play with!, \" Press X or O \" \n";
+//     while (true) {
+//         cin >> player_one;
+//         if (player_one == 'X' || player_one == 'x') {
+//             player_one = 'X';
+//             player_two = 'O';
+//             break;
+//         } else if (player_one == 'O' || player_one == 'o') {
+//             player_one = 'O';
+//             player_two = 'X';
+//             break;
+//         } else {
+//             cout << "Invalid choice. Please press X or O.\n";
+//         }
+//     }
+//     cout << "Now Player 1 is \"" << player_one << "\" and Player 2 is \"" << player_two << "\" \n";
+// }
+
+void initArray(char board[3][3]) {
+    for (int i = 0; i < 3; ++i) {
+        for (int j = 0; j < 3; ++j) {
+            board[i][j] = ' ';
+        }
+    }
 }
 
-// Function to draw the board
-void drawBoard(const char symbols[3][3]) {
-    #ifdef _WIN32
-        system("cls");
-    #else
-        system("clear");
-    #endif
-
-    cout << "\t\t\t\t\t\t" << " " << symbols[0][0] << " | " << symbols[0][1] << " | " << symbols[0][2] << endl;
-    cout << "\t\t\t\t\t\t" << "-----------" << endl;
-    cout << "\t\t\t\t\t\t" << " " << symbols[1][0] << " | " << symbols[1][1] << " | " << symbols[1][2] << endl;
-    cout << "\t\t\t\t\t\t" << "-----------" << endl;
-    cout << "\t\t\t\t\t\t" << " " << symbols[2][0] << " | " << symbols[2][1] << " | " << symbols[2][2] << endl;
-    cout << "\n\n\n\n";
+void drawBoard(const char board[3][3]) {
+    std::cout << "\t\t\t\t\t\t " << board[0][0] << " | " << board[0][1] << " | " << board[0][2] << "\n";
+    std::cout << "\t\t\t\t\t\t-----------\n";
+    std::cout << "\t\t\t\t\t\t " << board[1][0] << " | " << board[1][1] << " | " << board[1][2] << "\n";
+    std::cout << "\t\t\t\t\t\t-----------\n";
+    std::cout << "\t\t\t\t\t\t " << board[2][0] << " | " << board[2][1] << " | " << board[2][2] << "\n\n\n\n\n";
 }
 
-// Function to choose the play mode
 int choose_play_mode() {
     int mode;
-    cout << "What mode you want to play?" << endl << "Enter:\n0 for two players mode\n1 to play with the computer\n";
     while (true) {
-        cin >> mode;
-        if (mode == 0 || mode == 1) {
+        std::cout << "What mode you want to play?\nEnter:\n0 for two players mode\n1 to play with the computer\n";
+        std::cin >> mode;
+        
+        if (std::cin.fail()) {
+            std::cin.clear(); // clear the error flag
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // discard invalid input
+            std::cout << "Please Enter Valid Inputs: 0 for two players mode & 1 to play with the computer\n";
+        } else if (mode == 0 || mode == 1) {
             break;
         } else {
-            cout << "Please Enter Valid Inputs ,\" 0-> for two players mode & 1-> to play with the computer \" \n";
+            std::cout << "Please Enter Valid Inputs: 0 for two players mode & 1 to play with the computer\n";
         }
     }
     return mode;
-}
-
-// Function to get the player symbol for two players mode
-void get_two_player_symbols(char &player_one, char &player_two) {
-    cout << "Player 1 should choose what symbol to play with!, \" Press X or O \" \n";
-    while (true) {
-        cin >> player_one;
-        if (player_one == 'X' || player_one == 'x') {
-            player_one = 'X';
-            player_two = 'O';
-            break;
-        } else if (player_one == 'O' || player_one == 'o') {
-            player_one = 'O';
-            player_two = 'X';
-            break;
-        } else {
-            cout << "Invalid choice. Please press X or O.\n";
-        }
-    }
-    cout << "Now Player 1 is \"" << player_one << "\" and Player 2 is \"" << player_two << "\" \n";
 }
 
 // Function to check the win
